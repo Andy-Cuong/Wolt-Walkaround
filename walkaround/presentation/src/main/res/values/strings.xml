@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_failed_to_load_image">Failed to load image</string>
+    <string name="distance_from_you">%1$s ~ %2$s from you</string>
+    <string name="your_favorite">Your favorite. Tap to remove from favorites</string>
+    <string name="not_favorite">Not favorite. Tap to add to favorites</string>
+    <string name="score">Score</string>
+    <string name="wolt_walkaround">Wolt Walkaround</string>
+    <string name="added_to_favorites">%1$s added to Favorites</string>
+    <string name="error_failed_to_add_to_favorite">Failed to add to Favorite. Please try again</string>
+    <string name="removed_from_favorite">%1$s removed from Favorites</string>
+</resources>
