@@ -72,7 +72,7 @@ private fun BuildType.configureDebugBuildType(
     apiKey: String
 ) {
 //    buildConfigField("String", "API_KEY", "\"$apiKey\"")
-    buildConfigField("String", "BASE_URL", "\"https://restaurant-api.wolt.com/v1/pages\"")
+    buildConfigField("String", "BASE_URL", "\"https://restaurant-api.wolt.com\"")
 }
 
 private fun BuildType.configureReleaseBuildType(
@@ -80,7 +80,7 @@ private fun BuildType.configureReleaseBuildType(
     apiKey: String
 ) {
 //    buildConfigField("String", "API_KEY", "\"$apiKey\"")
-    buildConfigField("String", "BASE_URL", "\"https://restaurant-api.wolt.com/v1/pages\"")
+    buildConfigField("String", "BASE_URL", "\"https://restaurant-api.wolt.com\"")
 
     isMinifyEnabled = true
     proguardFiles(

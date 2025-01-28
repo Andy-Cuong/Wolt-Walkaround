@@ -30,7 +30,7 @@ class KtorVenueDiscoverer(
 
     override suspend fun getNearbyVenues(): Result<List<Venue>, DataError.Network> {
         return client.get<WoltRestaurantResponse>(
-            route = "restaurants",
+            route = "/v1/pages/restaurants",
             queryParameters = mapOf(
                 "lat" to currentLocation.lat,
                 "lon" to currentLocation.long
