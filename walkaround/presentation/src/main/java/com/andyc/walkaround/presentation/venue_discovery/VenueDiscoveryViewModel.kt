@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andyc.core.domain.location.Location
 import com.andyc.core.domain.util.Result
+import com.andyc.core.domain.venue.Venue
 import com.andyc.core.domain.venue.VenueRepository
 import com.andyc.core.presentation.ui.UiText
 import com.andyc.walkaround.presentation.R
@@ -67,29 +68,33 @@ class VenueDiscoveryViewModel(
                 viewModelScope.launch(Dispatchers.IO) {
 
                     val venue = action.venueUi.toVenue()
-                    if (state.favoriteVenues.contains(venue)) {
-                        venueRepository.deleteVenueFromFavorite(venue)
-                        _eventChannel.send(VenueDiscoveryEvent.RemoveFavoriteVenue(
-                            venueName = UiText.StringResource(
-                                R.string.removed_from_favorite,
-                                arrayOf(venue.name)
-                            )
-                        ))
-                    } else {
-                        when (venueRepository.addVenueAsFavorite(venue)) {
-                            is Result.Error -> {
-                                _eventChannel.send(VenueDiscoveryEvent.SaveFavoriteVenueFail)
-                            }
-                            is Result.Success -> {
-                                _eventChannel.send(VenueDiscoveryEvent.SaveFavoriteVenueSuccess(
-                                    venueName = UiText.StringResource(
-                                        R.string.added_to_favorites,
-                                        arrayOf(venue.name)
-                                    )
-                                ))
-                            }
-                        }
-                    }
+                    toggleFavoriteVenue(venue)
+                }
+            }
+        }
+    }
+
+    private suspend fun toggleFavoriteVenue(venue: Venue) {
+        if (state.favoriteVenues.contains(venue)) {
+            venueRepository.deleteVenueFromFavorite(venue)
+            _eventChannel.send(VenueDiscoveryEvent.RemoveFavoriteVenue(
+                venueName = UiText.StringResource(
+                    R.string.removed_from_favorite,
+                    arrayOf(venue.name)
+                )
+            ))
+        } else {
+            when (venueRepository.addVenueAsFavorite(venue)) {
+                is Result.Error -> {
+                    _eventChannel.send(VenueDiscoveryEvent.SaveFavoriteVenueFail)
+                }
+                is Result.Success -> {
+                    _eventChannel.send(VenueDiscoveryEvent.SaveFavoriteVenueSuccess(
+                        venueName = UiText.StringResource(
+                            R.string.added_to_favorites,
+                            arrayOf(venue.name)
+                        )
+                    ))
                 }
             }
         }
